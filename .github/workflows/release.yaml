@@ -1,0 +1,41 @@
+name: Release
+on:
+  push:
+    tags:
+      - v*.*.*
+jobs:
+  release:
+    name: Release workflow file
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Download tfcloud binary
+        run: |
+          curl -L https://github.com/chroju/tfcloud/releases/download/v{{ env.tfcloud_version }}/tfcloud_{{ env.tfcloud_version }}_darwin_amd64.tar.gz -o tfcloud.tar.gz
+          tar zxf tfcloud.tar.gz
+          rm tfcloud.tar.gz
+        env:
+          tfcloud_version: 0.1.1
+      - name: Build Alfred Workflow
+        uses: mperezi/build-alfred-workflow@v1
+        with:
+          workflow_dir: src
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+          draft: false
+          prerelease: false
+      - name: Upload Alfred Workflow
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ steps.alfred_builder.outputs.workflow_file }}
+          asset_name: ${{ steps.alfred_builder.outputs.workflow_file }}
+          asset_content_type: application/zip
