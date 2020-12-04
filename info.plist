@@ -232,7 +232,40 @@ TFCLOUD_FORMAT=alfred ./tfcloud workspace list ${organization}</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string>alfred-terraform-cloud-workflow
+===============================
+
+[Terraform Cloud](https://www.terraform.io/docs/cloud/index.html) Workflow for [Alfred 4](https://www.alfredapp.com/) .
+
+Setup
+--------
+
+Download the latest `.alfredworkflow` file from here and import it to your Alfred.
+
+https://github.com/chroju/alfred-terraform-cloud-workflow/releases
+
+You need to set some workflow environment variables.
+
+| Variable name | Required | Description | Default |
+|---|---|---|---|
+| organization | yes | Your Terraform Cloud organization name | N/A |
+| TF_CLI_CONFIG_FILE | no | See https://www.terraform.io/docs/commands/cli-config.html#development-overrides-for-provider-developers | N/A |
+
+### Credentials
+
+This workflow uses an API token in `$HOME/.terraformrc` . If you want to use an other file, set the path in the variable `TF_CLI_CONFIG_FILE` .
+
+### Usage
+
+3 commands are available. Search workspaces, registry modules, and Terraform current runs which needs a confirmation. Pressing enter will open the page for the selected workspace or registry module and runs.
+
+```
+tfcws &lt;workspace&gt;
+tfcmd &lt;registry module&gt;
+tfcruns &lt;runs&gt;
+```
+
+[![Usage sample](https://i.gyazo.com/a6ddc5a3f1aee2d8a41f5fc43639138e.gif)](https://gyazo.com/a6ddc5a3f1aee2d8a41f5fc43639138e)</string>
 	<key>uidata</key>
 	<dict>
 		<key>1258F9C7-ECFD-4CBA-AC1F-E01D0EFFEAA0</key>
@@ -267,9 +300,9 @@ TFCLOUD_FORMAT=alfred ./tfcloud workspace list ${organization}</string>
 	<key>variables</key>
 	<dict>
 		<key>TF_CLI_CONFIG_FILE</key>
-		<string>/Users/chroju/.terraformrc</string>
+		<string></string>
 		<key>organization</key>
-		<string>chroju</string>
+		<string></string>
 	</dict>
 	<key>variablesdontexport</key>
 	<array>
@@ -277,7 +310,7 @@ TFCLOUD_FORMAT=alfred ./tfcloud workspace list ${organization}</string>
 		<string>TF_CLI_CONFIG_FILE</string>
 	</array>
 	<key>version</key>
-	<string>0.1.0</string>
+	<string>0.1.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/chroju/alfred-terraform-cloud-workflow</string>
 </dict>
