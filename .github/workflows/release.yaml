@@ -1,5 +1,6 @@
 name: Release
 on:
+  workflow_dispatch:
   push:
     tags:
       - v*.*.*
@@ -12,16 +13,18 @@ jobs:
         uses: actions/checkout@master
       - name: Download tfcloud binary
         run: |
-          curl -L https://github.com/chroju/tfcloud/releases/download/v{{ env.tfcloud_version }}/tfcloud_{{ env.tfcloud_version }}_darwin_amd64.tar.gz -o tfcloud.tar.gz
+          curl -L https://github.com/chroju/tfcloud/releases/download/v${tfcloud_version}/tfcloud_${tfcloud_version}_darwin_amd64.tar.gz -o tfcloud.tar.gz
           tar zxf tfcloud.tar.gz
           rm tfcloud.tar.gz
         env:
           tfcloud_version: 0.1.1
       - name: Build Alfred Workflow
+        id: alfred_builder
         uses: mperezi/build-alfred-workflow@v1
         with:
-          workflow_dir: src
+          workflow_dir: .
       - name: Create Release
+        id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
