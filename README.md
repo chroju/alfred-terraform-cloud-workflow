@@ -1,5 +1,5 @@
-alfred-terraform-cloud-workflow
-===============================
+alfred-tfcloud-workflow
+=======================
 
 [Terraform Cloud](https://www.terraform.io/docs/cloud/index.html) Workflow for [Alfred 4](https://www.alfredapp.com/) .
 
