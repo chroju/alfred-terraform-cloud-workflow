@@ -8,7 +8,7 @@ Setup
 
 Download the latest `.alfredworkflow` file from here and import it to your Alfred.
 
-https://github.com/chroju/alfred-terraform-cloud-workflow/releases
+https://github.com/chroju/alfred-tfcloud-workflow/releases
 
 You need to set some workflow environment variables.
 
